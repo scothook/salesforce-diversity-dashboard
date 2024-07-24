@@ -1,0 +1,78 @@
+<template>
+  <article class="slds-card">
+    <template if:true={isLoading}>
+      <lightning-spinner
+        alternative-text="Loading"
+        size="medium"
+      ></lightning-spinner>
+    </template>
+
+    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+      <div class="slds-media__body">
+        <h2 class="slds-card__header-title">
+          <a
+            href="#"
+            class="slds-card__header-link slds-truncate"
+            title="Atrittion and Turnover Rates"
+          >
+            <span>Atrittion and Turnover Rates: {title}</span>
+          </a>
+        </h2>
+      </div>
+      <div class="slds-no-flex">
+        <c-csv-exporter
+          mydata={combinedData}
+          title={title}
+          columns={allcolumns}
+        ></c-csv-exporter>
+      </div>
+    </header>
+    <template lwc:if={combinedData}>
+      <lightning-datatable
+        key-field="id"
+        data={combinedData}
+        columns={allcolumns}
+        onrowselection={handleRowSelection}
+        resize-column-disabled
+      >
+      </lightning-datatable>
+    </template>
+    <template lwc:elseif={error}>
+      <c-error-panel errors={error}></c-error-panel>
+    </template>
+    <template lwc:else>
+      <b>Select search parameters to view report</b>
+    </template>
+    <template lwc:if={selectedInteractions}>
+      <header class="slds-media slds-media_center slds-has-flexi-truncate">
+        <div class="slds-media__body">
+          <h2 class="slds-card__header-title">
+            <a
+              href="#"
+              class="slds-card__header-link slds-truncate"
+              title="Atrittion and Turnover Rates"
+            >
+              <span>Employee Interactions</span>
+            </a>
+          </h2>
+        </div>
+        <div class="slds-no-flex">
+          <c-csv-exporter
+            mydata={selectedInteractions}
+            columns={interactColumns}
+            title={title}
+          ></c-csv-exporter>
+        </div>
+      </header>
+      <lightning-datatable
+        key-field="id"
+        sorted-direction={sortedDirection}
+        sorted-by={sortedBy}
+        onsort={updateColumnSorting}
+        data={selectedInteractions}
+        columns={interactColumns}
+      >
+      </lightning-datatable>
+    </template>
+  </article>
+</template>

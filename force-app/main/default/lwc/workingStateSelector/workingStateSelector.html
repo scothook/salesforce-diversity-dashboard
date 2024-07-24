@@ -1,0 +1,101 @@
+<template>
+  <lightning-card class="slds-m-around_medium custom border">
+    <b>Choose Working State</b>
+    <div class="slds-combobox_container">
+      <div
+        class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-m-bottom_small"
+        aria-expanded={isDropdownOpen}
+        aria-haspopup="listbox"
+      >
+        <div
+          class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+          role="none"
+        >
+          <input
+            type="text"
+            class="slds-input slds-combobox__input"
+            aria-controls="listbox-id"
+            autocomplete="on"
+            role="textbox"
+            placeholder="Search"
+            value={searchKey}
+            oninput={handleSearchChange}
+          />
+
+          <button
+            class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
+            title="Clear"
+            onclick={clearSearchKey}
+          >
+            <lightning-icon
+              icon-name="utility:close"
+              size="x-small"
+            ></lightning-icon>
+            <span class="slds-assistive-text">Clear</span>
+          </button>
+
+          <template if:true={showSpinner}>
+            <lightning-spinner
+              alternative-text="Loading"
+              size="small"
+              class="slds-m-left_x-small"
+            ></lightning-spinner>
+          </template>
+        </div>
+      </div>
+      <template if:true={searchResults}>
+        <template if:true={isDropdownOpen}>
+          <ul
+            class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid"
+            role="listbox"
+          >
+            <template for:each={searchResults} for:item="result">
+              <li key={result} role="presentation" class="slds-listbox__item">
+                <div
+                  id={result}
+                  data-id={result}
+                  class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small slds-media_center"
+                  role="option"
+                  onclick={handleSelect}
+                >
+                  <span class="slds-media__body">
+                    <span class="slds-truncate">{result}</span>
+                  </span>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </template>
+      </template>
+    </div>
+    <div class="slds-m-top_medium">
+      <template for:each={selectedStates} for:item="state" for:index="index">
+        <div
+          key={state}
+          class="slds-grid slds-gutters slds-align_absolute-center slds-m-bottom_x-small"
+        >
+          <div class="slds-col">
+            <lightning-input
+              name="name"
+              type="text"
+              value={state}
+              readonly
+            ></lightning-input>
+          </div>
+          <div class="slds-col slds-shrink-none slds-align_absolute-center">
+            <lightning-button-icon
+              icon-name="utility:delete"
+              variant="border-filled"
+              alternative-text="Delete"
+              title="Delete"
+              data-id={state}
+              onclick={removeStateSelection}
+              class="slds-m-left_x-small"
+            >
+            </lightning-button-icon>
+          </div>
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+</template>

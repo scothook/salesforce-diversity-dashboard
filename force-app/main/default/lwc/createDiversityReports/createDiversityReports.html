@@ -1,0 +1,84 @@
+<template>
+  <article class="slds-card">
+    <template if:true={isLoading}>
+      <lightning-spinner
+        alternative-text="Loading"
+        size="medium"
+      ></lightning-spinner>
+    </template>
+
+    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+      <div class="slds-media__body">
+        <h1 class="slds-card__header-title">
+          <a
+            href="#"
+            class="slds-card__header-link slds-truncate"
+            title="Atrittion and Turnover Rates"
+          >
+            <span>Diversity Reports: {title}</span>
+          </a>
+        </h1>
+      </div>
+    </header>
+    <div class="tables-container">
+      <template lwc:if={genderResults}>
+        <div class="table-wrapper">
+          <h2>Gender</h2>
+          <lightning-datatable
+            key-field="id"
+            data={genderResults}
+            columns={genderColumns}
+            hide-checkbox-column
+          >
+          </lightning-datatable>
+        </div>
+      </template>
+
+      <template lwc:if={ethnicityResults}>
+        <div class="table-wrapper">
+          <h2>Race/Ethnicity</h2>
+          <lightning-datatable
+            key-field="id"
+            data={ethnicityResults}
+            columns={ethnicityColumns}
+            hide-checkbox-column
+          >
+          </lightning-datatable>
+        </div>
+      </template>
+    </div>
+    <div class="tables-container">
+      <template lwc:if={veteranResults}>
+        <div class="table-wrapper">
+          <h2>Veteran Status</h2>
+          <lightning-datatable
+            key-field="id"
+            data={veteranResults}
+            columns={veteranColumns}
+            hide-checkbox-column
+          >
+          </lightning-datatable>
+        </div>
+      </template>
+      <!-- Placeholder for the second DataTable -->
+      <template lwc:if={disabilityResults}>
+        <div class="table-wrapper">
+          <h2>Disability Status</h2>
+          <lightning-datatable
+            key-field="id"
+            data={disabilityResults}
+            columns={disabilityColumns}
+            hide-checkbox-column
+          >
+          </lightning-datatable>
+        </div>
+      </template>
+      <template lwc:elseif={error}>
+        <c-error-panel errors={error}></c-error-panel>
+      </template>
+      <template lwc:else>
+        <b>Select search parameters to view report</b>
+      </template>
+    </div>
+  </article>
+</template>

@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+}
+
+.box1 {
+  flex: 10; /* Adjust the flex value as needed */
+  padding: 10px;
+}
+
+.box2 {
+  flex: 10; /* Adjust the flex value as needed */
+  padding: 10px;
+  justify-content: center;
+}
+
+.box3 {
+  flex: 10; /* Adjust the flex value as needed */
+  padding: 10px;
+}

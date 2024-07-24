@@ -1,0 +1,8 @@
+.tables-container {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent tables from wrapping to a new line */
+}
+
+.table-wrapper {
+    padding: 10px; /* Optional: Adds some spacing between tables */
+}

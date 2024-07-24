@@ -1,0 +1,35 @@
+<template>
+  <lightning-card title="Select Dates">
+    <lightning-combobox
+      name="daterange"
+      label="Date Range"
+      value={value}
+      placeholder="Select Date Range"
+      options={options}
+      onchange={handleChange}
+    ></lightning-combobox>
+    <template lwc:if={showCal}>
+      <lightning-layout multiple-rows="false">
+        <lightning-layout-item padding="around-small" size="6">
+          <lightning-input
+            type="date"
+            label="Start Date"
+            value={chooseStart}
+            onchange={handleStartDateChange}
+          >
+          </lightning-input>
+        </lightning-layout-item>
+
+        <lightning-layout-item padding="around-small" size="6">
+          <lightning-input
+            type="date"
+            label="End Date"
+            value={chooseEnd}
+            onchange={handleEndDateChange}
+          >
+          </lightning-input>
+        </lightning-layout-item>
+      </lightning-layout>
+    </template>
+  </lightning-card>
+</template>

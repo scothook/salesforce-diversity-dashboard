@@ -1,0 +1,51 @@
+<template>
+  <lightning-card>
+    <div class="container">
+      <div class="box1">
+        <c-start-end-datepicker class="slds-m-around_medium">
+        </c-start-end-datepicker>
+      </div>
+      <template lwc:if={dateReceived}>
+        <div class="box2">
+          <template for:each={options} for:item="option" for:index="index">
+            <lightning-input
+              key={option.value}
+              type="checkbox"
+              label={option.label}
+              value={option.value}
+              onchange={handleCheckboxChange}
+              data-index={index}
+              checked={option.checked}
+            >
+            </lightning-input>
+          </template>
+        </div>
+      </template>
+      <div class="box3">
+        <template lwc:if={showLocTile}>
+          <c-parent-loc-lookup
+            class="slds-m-around_medium"
+          ></c-parent-loc-lookup>
+        </template>
+        <template lwc:if={showDivTile}>
+          <c-division-picklist-param
+            class="slds-m-around_medium"
+          ></c-division-picklist-param>
+        </template>
+        <template lwc:if={showClientTile}>
+          <c-client-w-par-loc class="slds-m-around_medium"></c-client-w-par-loc>
+        </template>
+        <template lwc:if={showHRTile}>
+          <c-h-r-title-picklist-parameter>
+            class="slds-m-around_medium" ></c-h-r-title-picklist-parameter
+          >
+        </template>
+        <template lwc:if={showStateTile}>
+          <c-working-state-selector>
+            class="slds-m-around_medium" ></c-working-state-selector
+          >
+        </template>
+      </div>
+    </div>
+  </lightning-card>
+</template>

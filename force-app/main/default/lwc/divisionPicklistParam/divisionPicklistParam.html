@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="Pick Division">
+        <div class="slds-var-m-around_medium">
+            <template lwc:if={picklistValues.data} >
+                <template for:each={picklistValues.data.values} for:item="item">
+                    <lightning-input
+                        key={item.value}
+                        label={item.label}
+                        data-value={item.value}
+                        type="checkbox"
+                        onchange={handleCheckboxChange}
+                    >
+                    </lightning-input>
+                </template>
+            </template>
+            <template lwc:elseif={picklistValues.error}>
+                <c-error-panel errors={picklistValues.error}></c-error-panel>
+            </template>
+        </div>
+    </lightning-card>
+</template>
