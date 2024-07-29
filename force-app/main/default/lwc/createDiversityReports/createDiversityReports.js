@@ -11,6 +11,7 @@ import {
   MessageContext
 } from "lightning/messageService";
 import TRANSFER_PARAMETERS_CHANNEL from "@salesforce/messageChannel/transferParameters__c";
+import EXPORT_DATA_SELECTION_CHANNEL from "@salesforce/messageChannel/ExportDataSelection__c";
 
 /*eslint array-callback-return:off, no-unused-vars:off */
 
@@ -88,6 +89,21 @@ export default class createDiversityReports extends LightningElement {
    */
   connectedCallback() {
     this.subscribeParameterChannel();
+  }
+
+  renderedCallback() {
+    console.log("renderedCallback start");
+    this.sendData();
+    if (
+      this.isIntEmptyResponse === false &&
+      this.isStatusEmptyResponse === false &&
+      this.loadedReport === false
+    ) {
+      this.sendData();
+      //this.loadReport();
+      //this.loadedReport = true;
+    }
+    console.log("rendCallback end");
   }
 
   /**
@@ -325,6 +341,21 @@ export default class createDiversityReports extends LightningElement {
     });
     console.log(results);
     return results;
+  }
+
+  /**
+   * @function sendData
+   * @summary once data has been generated, send it to the export data channel
+   */
+  sendData() {
+    const payload = {
+      genderColumns: this.genderColumns,
+      genderResults: this.genderResults,
+      title: this.title
+    };
+    console.log(JSON.stringify(payload));
+    publish(this.context, EXPORT_DATA_SELECTION_CHANNEL, payload);
+    console.log("Published");
   }
 
   /**

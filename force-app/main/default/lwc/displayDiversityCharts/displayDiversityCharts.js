@@ -8,8 +8,8 @@ export default class DisplayDiversityCharts extends LightningElement {
     messageData = null;
     title = null;
     headers = null;
-    involSepData = [];
-    volSepData = [];
+    maleData = [];
+    femaleData = [];
     monthPairs = [];
 
     @wire(MessageContext)
@@ -38,22 +38,22 @@ export default class DisplayDiversityCharts extends LightningElement {
     handleExportMessage(message) {
         if (message){
                 this.headers = message.columns;
-                this.messageData = message.data;
+                this.messageData = message.genderResults;
                 this.title = message.title;
                 this.displayMessage(message);
-                //this.createDataSets();
+                this.createDataSets();
             }
             
     }
 
     //will need to change
     createDataSets() {
-        this.involSepData = this.messageData.map(month => parseFloat(month.involTurn));
-        // console.log(this.involSepData);
-        this.volSepData = this.messageData.map(month => parseFloat(month.volTurn));
-        // console.log(this.volSepData)
+        this.maleData = this.messageData.map(month => parseFloat(month.Male));
+        //console.log(this.maleData);
+        this.femaleData = this.messageData.map(month => parseFloat(month.Female));
+        //console.log(this.femaleData)
         this.monthPairs = this.messageData.map(month => month.monthYear);
-        // console.log(this.monthPairs);
+        //console.log(this.monthPairs);
 
         //check if chart is initialized
         if (this.chart) {
@@ -64,8 +64,8 @@ export default class DisplayDiversityCharts extends LightningElement {
     updateChartData() {
         // Update chart data
         this.chart.data.labels = this.monthPairs;
-        this.chart.data.datasets[0].data = this.volSepData;
-        this.chart.data.datasets[1].data = this.involSepData;
+        this.chart.data.datasets[0].data = this.maleData;
+        this.chart.data.datasets[1].data = this.femaleData;
     
         // Update the chart
         this.chart.update();
@@ -84,8 +84,8 @@ export default class DisplayDiversityCharts extends LightningElement {
         data: {
             labels: this.monthPairs,
             datasets: [
-                { data: this.volSepData, label: 'Male', backgroundColor:'#9BD0F5', borderColor: '#36A2EB' },
-                { data: this.involSepData, label: 'Female', borderColor: '#FF6384',
+                { data: this.maleData, label: 'Male', backgroundColor:'#9BD0F5', borderColor: '#36A2EB' },
+                { data: this.femaleData, label: 'Female', borderColor: '#FF6384',
                 backgroundColor: '#FFB1C1'}
             ]
         },
