@@ -11,7 +11,6 @@ import {
   MessageContext
 } from "lightning/messageService";
 import TRANSFER_PARAMETERS_CHANNEL from "@salesforce/messageChannel/transferParameters__c";
-import EXPORT_DATA_SELECTION_CHANNEL from "@salesforce/messageChannel/ExportDataSelection__c";
 
 /*eslint array-callback-return:off, no-unused-vars:off */
 
@@ -79,16 +78,6 @@ export default class createDiversityReports extends LightningElement {
 
   // display bools
   isLoading = false;
-  isStatusEmptyResponse = false;
-  isIntEmptyResponse = false;
-  loadedReport = false;
-  messageDataReceived = false;
-
-  // export variables
-  title;
-
-  // Processed data
-  allColumns = {};
 
   @wire(MessageContext)
   context;
@@ -99,21 +88,6 @@ export default class createDiversityReports extends LightningElement {
    */
   connectedCallback() {
     this.subscribeParameterChannel();
-  }
-
-  /**
-   * @function renderedCallback
-   * @summary check if employees and interactions have loaded while the report has not
-   */
-  renderedCallback() {
-    if (
-      this.isIntEmptyResponse === false &&
-      this.isStatusEmptyResponse === false &&
-      this.loadedReport === false
-    ) {
-      this.createArrays();
-      this.loadedReport = true;
-    }
   }
 
   /**
@@ -147,7 +121,6 @@ export default class createDiversityReports extends LightningElement {
   handleParameterMessage(message) {
     if (message) {
       // declare all variables for table null
-      this.allColumns = {};
       this.confidentialinfo = null;
       this.veteraninfo = null;
       this.disabilityinfo = null;
@@ -285,52 +258,7 @@ export default class createDiversityReports extends LightningElement {
     this.createRaceEthnArray();
     this.createVeteranArray();
     this.createDisabilityArray();
-
-    //send to data channel
-    this.combineObjects();
-    this.sendData();
   }
-
-  combineObjects() {
-    this.allcolumns = [
-      { label: "Month-Year", fieldName: "monthYear" },
-      { label: "SOM", fieldName: "som" },
-      { label: "EOM", fieldName: "eom" },
-      { label: "Avg OM", fieldName: "aom" },
-      { label: "Voluntary Separations", fieldName: "voluntary" },
-      { label: "Involuntary Separations", fieldName: "involuntary" },
-      { label: "Total Separations", fieldName: "totAttrition" },
-      { label: "Involuntary Turnover", fieldName: "involTurn" },
-      { label: "Voluntary Turnover", fieldName: "volTurn" },
-      { label: "Total Turnover", fieldName: "totTurn" }
-    ];
-
-    return {
-          monthYear: 1,
-          som: 2,
-          eom: 3,
-          aom: 4,
-          voluntary: 0,
-          involuntary: 0,
-          totAttrition: 0,
-          involTurn: 0,
-          volTurn: 0,
-          totTurn: 0
-    };
-  }
-
-  sendData() {
-    const payload = {
-
-      columns: this.allColumns,
-      data: this.combinedData,
-      title: this.title
-    };
-    console.log(JSON.stringify(payload));
-    publish(this.messageContext, EXPORT_DATA_SELECTION_CHANNEL, payload);
-    console.log("Published");
-  }
-
 
   createConfidentialArray() {
     if (this.confidentialinfo) {

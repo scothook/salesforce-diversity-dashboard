@@ -10,7 +10,7 @@ export function processInfo(table, fieldName, startDate, endDate) {
         let [year, month] = pair.split('-').map(Number);
         let formattedDate = getFormattedMonthYear(new Date(year, month - 1));
         // console.log(formattedDate);
-        
+
         const recordRow = table.map(record => [record[fieldName], record.Changed_At__c, record.Snapshot_Start_Date__c, record.Snapshot_End_Date__c]);
         let {tableOpts: opts, counts: recCounts} = getMonthlyBreakdown(recordRow, year, month);
 
@@ -24,7 +24,7 @@ export function processInfo(table, fieldName, startDate, endDate) {
                 ];
             }
         }
-        
+
         let recordArray = opts.map((row, j) => {
             return {
             [row]: recCounts[j]
@@ -34,7 +34,7 @@ export function processInfo(table, fieldName, startDate, endDate) {
         aggregatedResults[i][1] = recordArray;
         });
 
-    
+
     // console.log(aggregatedResults);
     return {aggregatedResults, returnOpts};
 }
@@ -53,7 +53,7 @@ export function processInfo(table, fieldName, startDate, endDate) {
         let start = new Date(startParts[0], startParts[1] - 1, startParts[2]);
         let endParts = endDate.split('-');
         let end = new Date(endParts[0], endParts[1] - 1, endParts[2]);
-        
+
         let pairs = [];
 
         while (start <= end) {
@@ -87,7 +87,7 @@ export function processInfo(table, fieldName, startDate, endDate) {
      * @return {Date[]} first day of the month, last day of the month.
      */
     function getMonthBoundaries(year, month) {
-        
+
         const firstDay = new Date(year, month - 1, 1, 0, 0, 0, 0);
         const lastDay = new Date(year, month, 0, 0, 0, 0, 0);
         return {firstDay, lastDay};
@@ -95,7 +95,7 @@ export function processInfo(table, fieldName, startDate, endDate) {
 
     function getMonthlyBreakdown(table, year, month) {
         let currOpt = table.map(opt => opt[0]);
-        
+
 
         const keys = [...new Set(currOpt)];
         let tableOpts = Array.from(keys);
@@ -144,9 +144,9 @@ export function processInfo(table, fieldName, startDate, endDate) {
                     counts[valIndex] += 1;
                 }
             }
-         
+
         }
         // console.log(rowcount);
         return {tableOpts, counts};
-    
+
     }
