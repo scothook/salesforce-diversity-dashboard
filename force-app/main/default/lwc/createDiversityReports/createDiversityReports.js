@@ -93,6 +93,7 @@ export default class createDiversityReports extends LightningElement {
 
   renderedCallback() {
     console.log("renderedCallback start");
+    console.log("Pre Send Dis Results: " + this.disabilityResults);
     this.sendData();
     if (
       this.isIntEmptyResponse === false &&
@@ -348,9 +349,11 @@ export default class createDiversityReports extends LightningElement {
    * @summary once data has been generated, send it to the export data channel
    */
   sendData() {
+    console.log("sendData: " + this.disabilityResults);
     const payload = {
       genderColumns: this.genderColumns,
       genderResults: this.genderResults,
+      disabilityResults: this.disabilityResults,
       title: this.title
     };
     console.log(JSON.stringify(payload));
