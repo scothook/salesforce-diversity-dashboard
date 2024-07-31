@@ -349,11 +349,13 @@ export default class createDiversityReports extends LightningElement {
    * @summary once data has been generated, send it to the export data channel
    */
   sendData() {
-    console.log("sendData: " + this.disabilityResults);
+    console.log("sendData: " + this.ethnicityResults);
     const payload = {
       genderColumns: this.genderColumns,
       genderResults: this.genderResults,
+      ethnicityResults: this.ethnicityResults,
       disabilityResults: this.disabilityResults,
+      veteranResults: this.veteranResults,
       title: this.title
     };
     console.log(JSON.stringify(payload));
