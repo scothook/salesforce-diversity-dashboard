@@ -136,16 +136,32 @@ export default class DisplayDiversityCharts extends LightningElement {
         }
         this.chartjsInitialized = true;
 
+        //this.createCanvas();
+
         try {
             await loadScript(this, chartjs);
+            this.createCanvas('genderChart');
+            this.createCanvas('raceChart');
+            this.createCanvas('veteranChart');
+            this.createCanvas('disabilityChart');
+            /*
             const canvas = document.createElement('canvas');
             canvas.width = 600;
             canvas.height = 400;
-            this.template.querySelector('div.chart').appendChild(canvas);
+            this.template.querySelector('div.genderChart').appendChild(canvas);
             const ctx = canvas.getContext('2d');
-            this.chart = new window.Chart(ctx, this.config);
+            this.chart = new window.Chart(ctx, this.config); */
         } catch (error) {
             this.error = error;
         }
+    }
+
+    createCanvas(chartClass) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 600;
+            canvas.height = 400;
+            this.template.querySelector(`div.${chartClass}`).appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+            this.chart = new window.Chart(ctx, this.config);
     }
 }
