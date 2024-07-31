@@ -80,10 +80,10 @@ export default class DisplayDiversityCharts extends LightningElement {
 
         this.ethnicityWhiteData = this.ethnicityMessageData.map(month => parseFloat(month.White));
         this.ethnicityAsianData = this.ethnicityMessageData.map(month => parseFloat(month.Asian));
-        // this.ethnicityBlackData = this.ethnicityMessageData.map(month => parseFloat(month["Black or African American"]));
-        // this.ethnicityHispanicData = this.ethnicityMessageData.map(month => parseFloat(month["Hispanic or Latino"]));
-        // this.ethnicityTwoOrMoreData = this.ethnicityMessageData.map(month => parseFloat(month["Two or more races"]));
-        // this.ethnicityNotSpecifiedData = this.ethnicityMessageData.map(month => parseFloat(month["Not specified"]));
+        this.ethnicityBlackData = this.ethnicityMessageData.map(month => parseFloat(month["Black or African American"]));
+        this.ethnicityHispanicData = this.ethnicityMessageData.map(month => parseFloat(month["Hispanic or Latino"]));
+        this.ethnicityTwoOrMoreData = this.ethnicityMessageData.map(month => parseFloat(month["Two or more races"]));
+        this.ethnicityNotSpecifiedData = this.ethnicityMessageData.map(month => parseFloat(month["Not specified"]));
 
         this.veteranNData = this.veteranMessageData.map(month => parseFloat(month.N));
         this.veteranIData = this.veteranMessageData.map(month => parseFloat(month.I));
