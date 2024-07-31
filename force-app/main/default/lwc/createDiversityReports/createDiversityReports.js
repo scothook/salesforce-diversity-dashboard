@@ -302,6 +302,7 @@ export default class createDiversityReports extends LightningElement {
         );
       this.ethnicityColumns = currOpts;
       this.ethnicityResults = this.createGenericArray(currResults);
+      //console.log(this.ethnicityResults + "HEREEEEEE");
     }
   }
 
