@@ -1,9 +1,11 @@
 <template>
     <lightning-card title="Diversity Charts" icon-name="custom:custom19">
-        <div class="genderChart" lwc:dom="manual"></div>
-        <div class="ethnicityChart" lwc:dom="manual"></div>
-        <div class="veteranChart" lwc:dom="manual"></div>
-        <div class="disabilityChart" lwc:dom="manual"></div>
+        <div class="charts-container">
+            <div class="genderChart" lwc:dom="manual"></div>
+            <div class="ethnicityChart" lwc:dom="manual"></div>
+            <div class="veteranChart" lwc:dom="manual"></div>
+            <div class="disabilityChart" lwc:dom="manual"></div>
+        </div>
         <template lwc:if={error}>
             <c-error-panel errors={error}></c-error-panel>
         </template>

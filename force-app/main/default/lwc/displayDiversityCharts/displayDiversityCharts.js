@@ -209,9 +209,8 @@ export default class DisplayDiversityCharts extends LightningElement {
         data: {
             labels: this.monthPairs,
             datasets: [
-                { data: this.maleData, label: 'Male', backgroundColor:'#9BD0F5', borderColor: '#36A2EB' },
-                { data: this.femaleData, label: 'Female', borderColor: '#FF6384',
-                backgroundColor: '#FFB1C1'}
+                { data: this.maleData, label: 'Male', borderColor: '#36A2EB', backgroundColor:'#9BD0F5' },
+                { data: this.femaleData, label: 'Female', borderColor: '#FF6384', backgroundColor: '#FFB1C1' }
             ]
         },
         options: {
@@ -255,12 +254,12 @@ export default class DisplayDiversityCharts extends LightningElement {
         data: {
             labels: this.monthPairs,
             datasets: [
-                { data: this.ethnicityWhiteData, label: 'White', backgroundColor:'#9BD0F5', borderColor: '#36A2EB' },
-                { data: this.ethnicityAsianData, label: 'Asian', borderColor: '#FF6384', backgroundColor: '#FFB1C1'},
-                { data: this.ethnicityBlackData, label: 'Black or African American', backgroundColor:'#9BD0F5', borderColor: '#36A2EB' },
-                { data: this.ethnicityHispanicData, label: 'Hispanic or Latino', borderColor: '#FF6384', backgroundColor: '#FFB1C1'},
-                { data: this.ethnicityTwoOrMoreData, label: 'Two or More Races', backgroundColor:'#9BD0F5', borderColor: '#36A2EB' },
-                { data: this.ethnicityNotSpecifiedData, label: 'Not Specified', borderColor: '#FF6384', backgroundColor: '#FFB1C1'}
+                { data: this.ethnicityWhiteData, label: 'White', borderColor: '#36A2EB', backgroundColor:'#9BD0F5' },
+                { data: this.ethnicityAsianData, label: 'Asian', borderColor: '#FF6384', backgroundColor: '#FFB1C1' },
+                { data: this.ethnicityBlackData, label: 'Black or African American', borderColor:'#FFCE56', backgroundColor: '#FFF3CC' },
+                { data: this.ethnicityHispanicData, label: 'Hispanic or Latino', borderColor: '#9966FF', backgroundColor: '#D1B3FF'},
+                { data: this.ethnicityTwoOrMoreData, label: 'Two or More Races', borderColor:'#FF9F40', backgroundColor: '#FFDBC1' },
+                { data: this.ethnicityNotSpecifiedData, label: 'Not Specified', borderColor: '#4CAF50', backgroundColor: '#C8E6C9'}
             ]
         },
         options: {
@@ -304,10 +303,10 @@ export default class DisplayDiversityCharts extends LightningElement {
         data: {
             labels: this.monthPairs,
             datasets: [
-                { data: this.veteranNData, label: 'N', backgroundColor:'#9BD0F5', borderColor: '#36A2EB' },
+                { data: this.veteranNData, label: 'N', borderColor: '#36A2EB', backgroundColor:'#9BD0F5' },
                 { data: this.veteranIData, label: 'I', borderColor: '#FF6384', backgroundColor: '#FFB1C1'},
-                { data: this.veteranDData, label: 'D', borderColor: '#FF6384', backgroundColor: '#FFB1C1'},
-                { data: this.veteranNoData, label: 'No', borderColor: '#FF6384', backgroundColor: '#FFB1C1'},
+                { data: this.veteranDData, label: 'D', borderColor: '#FFCE56', backgroundColor: '#FFF3CC'},
+                { data: this.veteranNoData, label: 'No', borderColor: '#9966FF', backgroundColor: '#D1B3FF'},
             ]
         },
         options: {
@@ -351,7 +350,7 @@ export default class DisplayDiversityCharts extends LightningElement {
         data: {
             labels: this.monthPairs,
             datasets: [
-                { data: this.disabilityFalseData, label: 'False', backgroundColor:'#9BD0F5', borderColor: '#36A2EB' },
+                { data: this.disabilityFalseData, label: 'False', borderColor: '#36A2EB', backgroundColor:'#9BD0F5' },
                 { data: this.disabilityTrueData, label: 'True', borderColor: '#FF6384',
                 backgroundColor: '#FFB1C1'}
             ]
