@@ -256,9 +256,9 @@ export default class DisplayDiversityCharts extends LightningElement {
             datasets: [
                 { data: this.ethnicityWhiteData, label: 'White', borderColor: '#36A2EB', backgroundColor:'#9BD0F5' },
                 { data: this.ethnicityAsianData, label: 'Asian', borderColor: '#FF6384', backgroundColor: '#FFB1C1' },
-                { data: this.ethnicityBlackData, label: 'Black or African American', borderColor:'#FFCE56', backgroundColor: '#FFF3CC' },
-                { data: this.ethnicityHispanicData, label: 'Hispanic or Latino', borderColor: '#9966FF', backgroundColor: '#D1B3FF'},
-                { data: this.ethnicityTwoOrMoreData, label: 'Two or More Races', borderColor:'#FF9F40', backgroundColor: '#FFDBC1' },
+                { data: this.ethnicityBlackData, label: 'Black', borderColor:'#FFCE56', backgroundColor: '#FFF3CC' },
+                { data: this.ethnicityHispanicData, label: 'Hispanic/Latino', borderColor: '#9966FF', backgroundColor: '#D1B3FF'},
+                { data: this.ethnicityTwoOrMoreData, label: 'Two Or More', borderColor:'#FF9F40', backgroundColor: '#FFDBC1' },
                 { data: this.ethnicityNotSpecifiedData, label: 'Not Specified', borderColor: '#4CAF50', backgroundColor: '#C8E6C9'}
             ]
         },
