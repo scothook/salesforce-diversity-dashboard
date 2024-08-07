@@ -72,9 +72,10 @@ export default class DisplayDiversityCharts extends LightningElement {
                 console.log("disabilityMessageData: " + this.ethnicityMessageData);
                 this.title = message.title;
                 this.displayMessage(message);
-                this.createDataSets();
+                if (this.disabilityMessageData) {
+                    this.createDataSets();
+                }
             }
-            
     }
 
     //will need to change
