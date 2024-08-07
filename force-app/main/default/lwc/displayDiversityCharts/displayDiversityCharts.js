@@ -93,16 +93,16 @@ export default class DisplayDiversityCharts extends LightningElement {
         this.ethnicityTwoOrMoreData = this.ethnicityMessageData.map(month => parseFloat(month["Two or more races"]));
         this.ethnicityNotSpecifiedData = this.ethnicityMessageData.map(month => parseFloat(month["Not specified"]));
         this.ethnicityPacificData = this.ethnicityMessageData.map(month => parseFloat(month["Native Hawaiian or Other Pacific Islander"]));
-        this.ethnicityAIorANData = this.ethnicityMessageData.map(month => parseFloat(month["American Indian or Alaskan Native"]));
-        this.ethnicityAIANData = this.ethnicityMessageData.map(month => parseFloat(month["American Indian/Alaskan Native"]));
+        this.ethnicityAIorANData = this.ethnicityMessageData.map(month => (parseFloat(month["American Indian or Alaskan Native"])+parseFloat(month["American Indian/Alaskan Native"])));
+        //this.ethnicityAIANData = this.ethnicityMessageData.map(month => parseFloat(month["American Indian/Alaskan Native"]));
 
-        this.veteranNData = this.veteranMessageData.map(month => parseFloat(month.N));
+        this.veteranNData = this.veteranMessageData.map(month => (parseFloat(month.N)+parseFloat(month.No)));
         this.veteranIData = this.veteranMessageData.map(month => parseFloat(month.I));
-        this.veteranDData = this.veteranMessageData.map(month => parseFloat(month.D));
-        this.veteranNoData = this.veteranMessageData.map(month => parseFloat(month.No));
-        this.veteranYData = this.veteranMessageData.map(month => parseFloat(month.Y));
-        this.veteranYesData = this.veteranMessageData.map(month => parseFloat(month.Yes));
-        this.veteranDeclineData = this.veteranMessageData.map(month => parseFloat(month["Decline to Answer"]));
+        this.veteranDData = this.veteranMessageData.map(month => (parseFloat(month.D)+parseFloat(month["Decline to Answer"])));
+        //this.veteranNoData = this.veteranMessageData.map(month => parseFloat(month.No));
+        this.veteranYData = this.veteranMessageData.map(month => (parseFloat(month.Y)+parseFloat(month.Yes)));
+        //this.veteranYesData = this.veteranMessageData.map(month => parseFloat(month.Yes));
+        //this.veteranDeclineData = this.veteranMessageData.map(month => parseFloat(month["Decline to Answer"]));
         console.log(this.veteranNData);
         console.log(this.veteranNoData);
         console.log(this.monthPairs);
@@ -133,18 +133,18 @@ export default class DisplayDiversityCharts extends LightningElement {
         this.charts.ethnicityChart.data.datasets[3].data = this.ethnicityHispanicData;
         this.charts.ethnicityChart.data.datasets[4].data = this.ethnicityPacificData;
         this.charts.ethnicityChart.data.datasets[5].data = this.ethnicityAIorANData;
-        this.charts.ethnicityChart.data.datasets[6].data = this.ethnicityAIANData;
-        this.charts.ethnicityChart.data.datasets[7].data = this.ethnicityTwoOrMoreData;
-        this.charts.ethnicityChart.data.datasets[8].data = this.ethnicityNotSpecifiedData;
+        //this.charts.ethnicityChart.data.datasets[6].data = this.ethnicityAIANData;
+        this.charts.ethnicityChart.data.datasets[6].data = this.ethnicityTwoOrMoreData;
+        this.charts.ethnicityChart.data.datasets[7].data = this.ethnicityNotSpecifiedData;
 
         this.charts.veteranChart.data.labels = this.monthPairs;
         this.charts.veteranChart.data.datasets[0].data = this.veteranIData;
-        this.charts.veteranChart.data.datasets[2].data = this.veteranNData;
-        this.charts.veteranChart.data.datasets[4].data = this.veteranNoData;
-        this.charts.veteranChart.data.datasets[3].data = this.veteranYData;
-        this.charts.veteranChart.data.datasets[5].data = this.veteranYesData;
-        this.charts.veteranChart.data.datasets[1].data = this.veteranDData;
-        this.charts.veteranChart.data.datasets[6].data = this.veteranDeclineData;
+        this.charts.veteranChart.data.datasets[1].data = this.veteranNData;
+        //this.charts.veteranChart.data.datasets[4].data = this.veteranNoData;
+        this.charts.veteranChart.data.datasets[2].data = this.veteranYData;
+        //this.charts.veteranChart.data.datasets[5].data = this.veteranYesData;
+        this.charts.veteranChart.data.datasets[3].data = this.veteranDData;
+        //this.charts.veteranChart.data.datasets[6].data = this.veteranDeclineData;
         
 
         this.charts.disabilityChart.data.labels = this.monthPairs;
@@ -205,7 +205,7 @@ export default class DisplayDiversityCharts extends LightningElement {
 
     createCanvas(chartClass) {
             const canvas = document.createElement(`canvas`);
-            canvas.width = 700;
+            canvas.width = 800;
             canvas.height = 400;
             this.template.querySelector(`div.${chartClass}`).appendChild(canvas);
             const ctx = canvas.getContext('2d');
@@ -277,13 +277,12 @@ export default class DisplayDiversityCharts extends LightningElement {
             datasets: [
                 { data: this.ethnicityWhiteData, label: 'White', borderColor: '#36A2EB', backgroundColor:'#9BD0F5' },
                 { data: this.ethnicityAsianData, label: 'Asian', borderColor: '#FF6384', backgroundColor: '#FFB1C1' },
-                { data: this.ethnicityBlackData, label: 'Black', borderColor:'#FFCE56', backgroundColor: '#FFF3CC' },
-                { data: this.ethnicityHispanicData, label: 'Hispanic/Latino', borderColor: '#9966FF', backgroundColor: '#D1B3FF'},
-                { data: this.ethnicityPacificData, label: 'Native Hawaiian/Pacific Islander', borderColor:'#FF9F40', backgroundColor: '#FFDBC1' },
-                { data: this.ethnicityAIorANData, label: 'American Indian or Alaskan Native', borderColor: '#4CAF50', backgroundColor: '#C8E6C9'},
-                { data: this.ethnicityAIANData, label: 'American Indian/Alaskan Native', borderColor: '#8E44AD', backgroundColor: '#E8DAEF'},
-                { data: this.ethnicityTwoOrMoreData, label: 'Two Or More', borderColor: '#E74C3C', backgroundColor: '#FADBD8'},
-                { data: this.ethnicityNotSpecifiedData, label: 'Not Specified', borderColor: '#3498DB', backgroundColor: '#D6EAF8'}
+                { data: this.ethnicityBlackData, label: 'Black', borderColor:'#4BC0C0', backgroundColor: '#A2E8E8' },
+                { data: this.ethnicityHispanicData, label: 'Hispanic/Latino', borderColor: '#FFCE56', backgroundColor: '#FFE599'},
+                { data: this.ethnicityPacificData, label: 'Hawaiian/Pacific Islander', borderColor:'#9966FF', backgroundColor: '#D1B3FF' },
+                { data: this.ethnicityAIorANData, label: 'American Indian/Alaska N.', borderColor: '#FF9F40', backgroundColor: '#FFD1A6'},
+                { data: this.ethnicityTwoOrMoreData, label: 'Two Or More', borderColor: '#8D6E63', backgroundColor: '#D7CCC8'},
+                { data: this.ethnicityNotSpecifiedData, label: 'Not Specified', borderColor: '#27AE60', backgroundColor: '#7DCEA0'}
             ]
         },
         options: {
@@ -329,11 +328,8 @@ export default class DisplayDiversityCharts extends LightningElement {
             datasets: [
                 { data: this.veteranIData, label: 'I', borderColor: '#36A2EB', backgroundColor:'#9BD0F5' },
                 { data: this.veteranNData, label: 'N', borderColor: '#FF6384', backgroundColor: '#FFB1C1'},
-                { data: this.veteranNoData, label: 'No', borderColor: '#FFCE56', backgroundColor: '#FFF3CC'},
-                { data: this.veteranYData, label: 'Y', borderColor: '#9966FF', backgroundColor: '#D1B3FF'},
-                { data: this.veteranYesData, label: 'Yes', borderColor: '#FF9F40', backgroundColor: '#FFDBC1'},
-                { data: this.veteranDData, label: 'D', borderColor: '#4CAF50', backgroundColor: '#C8E6C9'},
-                { data: this.veteranDeclineData, label: 'Decline to Answer', borderColor: '#8E44AD', backgroundColor: '#E8DAEF'}
+                { data: this.veteranYData, label: 'Y', borderColor: '#4BC0C0', backgroundColor: '#A2E8E8'},
+                { data: this.veteranDData, label: 'D', borderColor: '#FFCE56', backgroundColor: '#FFE599'}
             ]
         },
         options: {
